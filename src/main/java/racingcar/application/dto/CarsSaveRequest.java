@@ -23,5 +23,13 @@ public record CarsSaveRequest(
                 throw new IllegalArgumentException(String.format("차 이름 형식이 올바르지 않습니다. 이름: %s", name));
             }
         }
+
+        long uniqueCount = carNames.stream()
+                .distinct()
+                .count();
+
+        if (uniqueCount != carNames.size()) {
+            throw new IllegalArgumentException("차 이름이 중복되었습니다.");
+        }
     }
 }
