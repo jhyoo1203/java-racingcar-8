@@ -11,19 +11,19 @@ import racingcar.view.OutputView;
 public class AppConfig {
 
     // 뷰 DI
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    private static final InputView inputView = new InputView();
+    private static final OutputView outputView = new OutputView();
 
     // 레포지토리 DI
-    private final CarRepository carRepository = new CarRepository();
-    private final RacingRepository racingRepository = new RacingRepository();
+    private static final CarRepository carRepository = new CarRepository();
+    private static final RacingRepository racingRepository = new RacingRepository();
 
     // 서비스 DI
-    private final CarService carService = new CarService(carRepository);
-    private final RacingService racingService = new RacingService(racingRepository, carService);
+    private static final CarService carService = new CarService(carRepository);
+    private static final RacingService racingService = new RacingService(racingRepository, carService);
 
     // 컨트롤러 DI
-    private final RacingController racingController = new RacingController(
+    private static final RacingController racingController = new RacingController(
             inputView,
             outputView,
             carService,
