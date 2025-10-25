@@ -1,18 +1,13 @@
 package racingcar.application;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import racingcar.application.dto.TryCountSaveRequest;
 import racingcar.domain.Car;
 import racingcar.domain.repository.RacingRepository;
+import racingcar.util.MoveCondition;
 
 import java.util.List;
 
 public class RacingService {
-
-    // 랜덤 숫자 범위 및 이동 임계값
-    private static final int MIN_RANDOM_RANGE = 1;
-    private static final int MAX_RANDOM_RANGE = 9;
-    private static final int MOVABLE_THRESHOLD = 4;
 
     private final RacingRepository racingRepository;
     private final CarService carService;
@@ -41,13 +36,11 @@ public class RacingService {
     }
 
     private void attemptMove(List<Car> cars) {
-        for (Car car : cars) {
-            int randomNumber = Randoms.pickNumberInRange(MIN_RANDOM_RANGE, MAX_RANDOM_RANGE);
-
-            if (randomNumber >= MOVABLE_THRESHOLD) {
+        cars.forEach(car -> {
+            if (MoveCondition.canMove()) {
                 car.moveForward();
             }
-        }
+        });
 
         carService.updateCars(cars);
     }
