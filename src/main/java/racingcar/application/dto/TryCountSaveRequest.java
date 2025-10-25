@@ -1,18 +1,21 @@
 package racingcar.application.dto;
 
 public record TryCountSaveRequest(
-    int tryCount
+        int tryCount
 ) {
 
     private static final int MIN_TRY_COUNT = 1;
     private static final int MAX_TRY_COUNT = 100;
 
+    public TryCountSaveRequest {
+        validate(tryCount);
+    }
+
     public static TryCountSaveRequest from(int tryCount) {
-        validateTryCount(tryCount);
         return new TryCountSaveRequest(tryCount);
     }
 
-    private static void validateTryCount(int tryCount) {
+    private void validate(int tryCount) {
         if (tryCount < MIN_TRY_COUNT) {
             throw new IllegalArgumentException("시도 횟수는 1 이상이어야 합니다.");
         }
