@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
 public record CarsSaveRequest(
         List<String> carNames
 ) {
+
+    private static final int MIN_CAR_COUNT = 2;
+    private static final int MAX_CAR_COUNT = 10;
     private static final Pattern CAR_NAME_PATTERN = Pattern.compile("^[a-zA-Z0-9]{1,5}$");
 
     public CarsSaveRequest(List<String> carNames) {
@@ -22,10 +25,7 @@ public record CarsSaveRequest(
     }
 
     private void validate(List<String> carNames) {
-        if (CollectionUtil.isEmpty(carNames)) {
-            throw new IllegalArgumentException("차량 목록이 비어 있습니다.");
-        }
-
+        validateCarCount(carNames);
         Set<String> uniqueNames = new HashSet<>();
 
         for (String name : carNames) {
@@ -38,6 +38,20 @@ public record CarsSaveRequest(
             if (!uniqueNames.add(name)) {
                 throw new IllegalArgumentException("차 이름이 중복되었습니다.");
             }
+        }
+    }
+
+    private static void validateCarCount(List<String> carNames) {
+        if (CollectionUtil.isEmpty(carNames)) {
+            throw new IllegalArgumentException("차량 목록이 비어 있습니다.");
+        }
+
+        if (carNames.size() < MIN_CAR_COUNT) {
+            throw new IllegalArgumentException(String.format("차량은 최소 %d대 이상이어야 합니다.", MIN_CAR_COUNT));
+        }
+
+        if (carNames.size() > MAX_CAR_COUNT) {
+            throw new IllegalArgumentException(String.format("차량은 최대 %d대 이하이어야 합니다.", MAX_CAR_COUNT));
         }
     }
 }
