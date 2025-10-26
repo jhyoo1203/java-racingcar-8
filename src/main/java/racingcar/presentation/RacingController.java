@@ -28,12 +28,12 @@ public class RacingController {
     }
 
     public void start() {
-        raceInit();
+        initializeRacing();
         outputView.printRaceProcess(racingService.race());
         outputView.printWinners(racingService.getWinners());
     }
 
-    private void raceInit() {
+    private void initializeRacing() {
         saveCars();
         saveTryCount();
     }
