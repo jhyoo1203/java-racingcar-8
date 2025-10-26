@@ -25,7 +25,25 @@ public record CarsSaveRequest(
     }
 
     private void validate(List<String> carNames) {
-        validateCarCount(carNames);
+        validateCount(carNames);
+        validateNameFormat(carNames);
+    }
+
+    private void validateCount(List<String> carNames) {
+        if (CollectionUtil.isEmpty(carNames)) {
+            throw new IllegalArgumentException("차량 목록이 비어 있습니다.");
+        }
+
+        if (carNames.size() < MIN_CAR_COUNT) {
+            throw new IllegalArgumentException(String.format("차량은 최소 %d대 이상이어야 합니다.", MIN_CAR_COUNT));
+        }
+
+        if (carNames.size() > MAX_CAR_COUNT) {
+            throw new IllegalArgumentException(String.format("차량은 최대 %d대 이하이어야 합니다.", MAX_CAR_COUNT));
+        }
+    }
+
+    private void validateNameFormat(List<String> carNames) {
         Set<String> uniqueNames = new HashSet<>();
 
         for (String name : carNames) {
@@ -38,20 +56,6 @@ public record CarsSaveRequest(
             if (!uniqueNames.add(name)) {
                 throw new IllegalArgumentException("차 이름이 중복되었습니다.");
             }
-        }
-    }
-
-    private static void validateCarCount(List<String> carNames) {
-        if (CollectionUtil.isEmpty(carNames)) {
-            throw new IllegalArgumentException("차량 목록이 비어 있습니다.");
-        }
-
-        if (carNames.size() < MIN_CAR_COUNT) {
-            throw new IllegalArgumentException(String.format("차량은 최소 %d대 이상이어야 합니다.", MIN_CAR_COUNT));
-        }
-
-        if (carNames.size() > MAX_CAR_COUNT) {
-            throw new IllegalArgumentException(String.format("차량은 최대 %d대 이하이어야 합니다.", MAX_CAR_COUNT));
         }
     }
 }
