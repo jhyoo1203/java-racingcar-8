@@ -8,7 +8,7 @@ import racingcar.presentation.RacingController;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
-public class AppConfig {
+public final class AppConfig {
 
     // 뷰 DI
     private static final InputView inputView = new InputView();
