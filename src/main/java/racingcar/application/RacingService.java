@@ -24,8 +24,9 @@ public class RacingService {
     public String race() {
         StringBuilder result = new StringBuilder();
         List<Car> cars = carService.getCars();
+        int tryCount = racingRepository.findTryCount();
 
-        for (int i = 0; i < racingRepository.findTryCount(); i++) {
+        for (int i = 0; i < tryCount; i++) {
             attemptMove(cars);
 
             // 자동차 현황 문자열로 표현하여 StringBuilder에 추가
