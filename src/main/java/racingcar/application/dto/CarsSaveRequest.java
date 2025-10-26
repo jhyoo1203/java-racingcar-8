@@ -34,12 +34,8 @@ public record CarsSaveRequest(
             throw new IllegalArgumentException("차량 목록이 비어 있습니다.");
         }
 
-        if (carNames.size() < MIN_CAR_COUNT) {
-            throw new IllegalArgumentException(String.format("차량은 최소 %d대 이상이어야 합니다.", MIN_CAR_COUNT));
-        }
-
-        if (carNames.size() > MAX_CAR_COUNT) {
-            throw new IllegalArgumentException(String.format("차량은 최대 %d대 이하이어야 합니다.", MAX_CAR_COUNT));
+        if (carNames.size() < MIN_CAR_COUNT || carNames.size() > MAX_CAR_COUNT) {
+            throw new IllegalArgumentException(String.format("차량 수는 %d 이상 %d 이하이어야 합니다.", MIN_CAR_COUNT, MAX_CAR_COUNT));
         }
     }
 
