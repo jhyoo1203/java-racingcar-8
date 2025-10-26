@@ -15,9 +15,9 @@ public record CarsSaveRequest(
     private static final int MAX_CAR_COUNT = 10;
     private static final Pattern CAR_NAME_PATTERN = Pattern.compile("^[a-zA-Z0-9]{1,5}$");
 
-    public CarsSaveRequest(List<String> carNames) {
+    public CarsSaveRequest {
         validate(carNames);
-        this.carNames = List.copyOf(carNames);
+        carNames = List.copyOf(carNames);
     }
 
     public static CarsSaveRequest from(List<String> carNames) {
