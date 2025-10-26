@@ -3,6 +3,7 @@ package racingcar.application;
 import racingcar.application.dto.CarsSaveRequest;
 import racingcar.domain.Car;
 import racingcar.domain.repository.CarRepository;
+import racingcar.util.CollectionUtil;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class CarService {
     }
 
     public void updateCars(List<Car> cars) {
-        if (cars == null || cars.isEmpty()) {
+        if (CollectionUtil.isEmpty(cars)) {
             throw new IllegalArgumentException("업데이트할 차량 목록이 비어 있습니다.");
         }
 
