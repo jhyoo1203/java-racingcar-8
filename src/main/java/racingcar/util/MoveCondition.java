@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public final class MoveCondition {
 
-    private static final int MIN_RANDOM_RANGE = 1;
+    private static final int MIN_RANDOM_RANGE = 0;
     private static final int MAX_RANDOM_RANGE = 9;
     private static final int MOVABLE_THRESHOLD = 4;
 
