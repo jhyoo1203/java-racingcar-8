@@ -16,12 +16,8 @@ public record TryCountSaveRequest(
     }
 
     private void validate(int tryCount) {
-        if (tryCount < MIN_TRY_COUNT) {
-            throw new IllegalArgumentException("시도 횟수는 1 이상이어야 합니다.");
-        }
-
-        if (tryCount > MAX_TRY_COUNT) {
-            throw new IllegalArgumentException("시도 횟수는 100 이하이어야 합니다.");
+        if (tryCount < MIN_TRY_COUNT || tryCount > MAX_TRY_COUNT) {
+            throw new IllegalArgumentException(String.format("시도 횟수는 %d 이상 %d 이하이어야 합니다.", MIN_TRY_COUNT, MAX_TRY_COUNT));
         }
     }
 }
