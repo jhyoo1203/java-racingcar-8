@@ -1,5 +1,7 @@
 package racingcar.application.dto;
 
+import racingcar.util.CollectionUtil;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,7 +22,7 @@ public record CarsSaveRequest(
     }
 
     private void validate(List<String> carNames) {
-        if (carNames == null || carNames.isEmpty()) {
+        if (CollectionUtil.isEmpty(carNames)) {
             throw new IllegalArgumentException("차량 목록이 비어 있습니다.");
         }
 
